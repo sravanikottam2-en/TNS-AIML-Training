@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}Dashboard{% endblock %}{% block content %}
+<div class="page-head"><div><span class="eyebrow">YOUR OVERVIEW</span><h1>Hello, {{ session.get('username') }}.</h1><p class="muted">Your saved activity at a glance.</p></div><a class="btn" href="{{ url_for('predict') }}">＋ New prediction</a></div>
+<div class="stats"><div class="stat"><span>Total predictions</span><strong>{{ total }}</strong></div><div class="stat"><span>Latest activity</span><strong>{{ history[0].created_at[:10] if history else '—' }}</strong></div><div class="stat"><span>ML model</span><strong>Random Forest</strong></div></div>
+<div class="panel"><div class="panel-head"><h2>Recent predictions</h2><a href="{{ url_for('history') }}">View all →</a></div>
+{% if history %}<div class="table-wrap"><table><thead><tr><th>Date</th><th>Risk estimate</th><th>Demo category</th><th>Report</th></tr></thead><tbody>
+{% for row in history %}<tr><td>{{ row.created_at[:16].replace('T',' ') }}</td><td>{{ "%.1f"|format(row.risk_probability) }}%</td><td><span class="tag {{ row.risk_level|lower }}">{{ row.risk_level }}</span></td><td><a href="{{ url_for('report', prediction_id=row.id) }}">Download</a></td></tr>{% endfor %}
+</tbody></table></div>{% else %}<div class="empty">No predictions yet. Start by entering the required values.</div>{% endif %}</div>
+<p class="notice">Risk percentages are outputs from a synthetic-data demonstration model, not real medical probabilities.</p>{% endblock %}

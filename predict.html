@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block title %}Risk prediction{% endblock %}{% block content %}
+<div class="page-head"><div><span class="eyebrow">MODEL INPUT</span><h1>Diabetes risk estimate</h1><p class="muted">Enter the requested values to run the supervised classifier.</p></div></div>
+<div class="form-layout"><form class="panel prediction-form" method="post">
+<div class="field-grid">
+<label>Pregnancies<input type="number" name="pregnancies" min="0" max="20" step="1" value="0" required></label>
+<label>Glucose (mg/dL)<input type="number" name="glucose" min="0" max="300" step="any" placeholder="e.g. 120" required></label>
+<label>Blood pressure (mmHg)<input type="number" name="blood_pressure" min="0" max="200" step="any" placeholder="e.g. 72" required></label>
+<label>Skin thickness (mm)<input type="number" name="skin_thickness" min="0" max="100" step="any" placeholder="e.g. 20" required></label>
+<label>Insulin (µU/mL)<input type="number" name="insulin" min="0" max="1000" step="any" placeholder="e.g. 80" required></label>
+<label>BMI<input type="number" name="bmi" min="0" max="80" step="any" placeholder="e.g. 28.5" required></label>
+<label>Diabetes pedigree function<input type="number" name="diabetes_pedigree" min="0" max="5" step="any" placeholder="e.g. 0.5" required></label>
+<label>Age (years)<input type="number" name="age" min="1" max="120" step="1" placeholder="e.g. 35" required></label>
+</div><button class="btn full">Calculate demo estimate</button></form>
+<aside class="side-note"><h3>Before you continue</h3><p>Use values from an appropriate health record or clinician if this is a classroom demonstration. Do not enter another person's information without permission.</p><p>This model uses generated synthetic training data. It is not a diagnosis and must not guide healthcare decisions.</p></aside></div>
+{% if result %}<section class="result-card"><span class="eyebrow">MODEL OUTPUT · SAVED TO HISTORY</span><h2>{{ result.probability }}% <small>estimated model probability</small></h2><div class="meter"><span style="width:{{ result.probability }}%"></span></div><p>Demo category: <span class="tag {{ result.level|lower }}">{{ result.level }}</span></p><a class="btn" href="{{ url_for('report', prediction_id=result.id) }}">Download report</a> <a class="btn secondary" href="{{ url_for('history') }}">View history</a></section>{% endif %}
+{% endblock %}

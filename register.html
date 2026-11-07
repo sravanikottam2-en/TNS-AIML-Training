@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}Create account{% endblock %}{% block content %}
+<div class="auth-card"><span class="eyebrow">JOIN GLUCOGUIDE</span><h1>Create account</h1><form method="post">
+<label>Username<input name="username" required minlength="3" autocomplete="username"></label>
+<label>Email<input type="email" name="email" required autocomplete="email"></label>
+<label>Password<input type="password" name="password" required minlength="8" autocomplete="new-password"></label>
+<button class="btn full">Create account</button></form><p class="muted">Already registered? <a href="{{ url_for('login') }}">Log in</a></p></div>{% endblock %}

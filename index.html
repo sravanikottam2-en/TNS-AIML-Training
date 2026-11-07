@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}GlucoGuide | Diabetes Risk Demo{% endblock %}
+{% block content %}
+<section class="hero"><div><span class="eyebrow">SUPERVISED MACHINE LEARNING PROJECT</span>
+<h1>Understand your health inputs.<br><em>Explore a risk estimate.</em></h1>
+<p>A learning-focused diabetes risk prediction demo with a personal dashboard, saved history, and downloadable reports.</p>
+<div class="actions"><a class="btn" href="{{ url_for('register') }}">Get started</a><a class="btn secondary" href="{{ url_for('login') }}">Log in</a></div>
+<p class="notice">Demo only: model is trained on synthetic data and is not clinically validated.</p></div>
+<div class="hero-card"><div class="pulse">✚</div><h3>Your health, organized</h3><p>Prediction · History · Tips · Reports</p><div class="mini-stat"><span>ML engine</span><strong>Random Forest</strong></div><div class="mini-stat"><span>Storage</span><strong>SQLite</strong></div></div></section>
+{% endblock %}
